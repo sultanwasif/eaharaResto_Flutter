@@ -8,6 +8,8 @@ import 'package:flutterapp/src/constants/text.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'model/booking_details_dto.dart';
+
 class OrderList extends StatefulWidget {
   final String titleText;
 
@@ -24,7 +26,7 @@ class _OrderListState extends State<OrderList> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   late bool _isInit = true;
   late List data = [];
-
+  late List<ShopBookingDetails> resultData = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -46,6 +48,11 @@ class _OrderListState extends State<OrderList> {
       headers: tHeaders,
     );
     data = jsonDecode(response.body);
+    List<dynamic> shoppingData = jsonDecode(response.body);
+
+    for(int index =0;index < shoppingData.length;index ++){
+      resultData.add(ShopBookingDetails.fromJson(shoppingData[index]));
+    }
     // if (kDebugMode) {
     //   print(response.body.length);
     // }
@@ -91,14 +98,14 @@ class _OrderListState extends State<OrderList> {
               ),
               Expanded(
                 child: ListView.builder(
-                    itemCount: data.length,
+                    itemCount: resultData.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
                         child: Column(
                           children: [
-                            Text(data[index]["RefNo"].toString()),
-                            Text(data[index]["Name"].toString()),
-                            Text(data[index]["Total"].toString()),
+                            Text(resultData[index].refNo.toString()),
+                            Text(resultData[index].name.toString()),
+                            Text(resultData[index].total.toString()),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -111,17 +118,17 @@ class _OrderListState extends State<OrderList> {
                             ListView.builder(
                               shrinkWrap: true,
                                 itemBuilder: (BuildContext context, int index1) {
-                                  late List subData = data[index]["BookingDetails"];
+                                  late List<BookingDetail> subData = resultData[index].bookingDetails;
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [Text(subData[index1]["Item"]["Name"].toString()),
-                                  Text(subData[index1]["Price"].toString()),
-                                  Text(subData[index1]["Quantity"].toString()),
+                                children: [Text(subData[index1].item.name.toString()),
+                                  Text(subData[index1].price.toString()),
+                                  Text(subData[index1].quantity.toString()),
                                 ],
                               ) ;
                             },
-                            itemCount: data[index]["BookingDetails"].length,)
+                            itemCount: resultData[index].bookingDetails.length,)
                             // ListView(
                             //   children: <Widget>[
                             //     Center(

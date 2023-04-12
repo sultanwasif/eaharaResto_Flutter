@@ -8,6 +8,7 @@ import 'package:flutterapp/src/constants/text.dart';
 import 'package:flutterapp/src/features/authentication/screens/spashscreen/splashscreen.dart';
 import 'package:flutterapp/src/features/authentication/screens/welcome_screen/welcomescreen.dart';
 import 'package:flutterapp/src/features/domain/orders_list.dart';
+import 'package:flutterapp/src/features/nav_drawer/nav_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -41,16 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+            iconTheme: const IconThemeData(color: Colors.black),
             backgroundColor: tPrimaryColor,
             title: Text(
               "eAhara Restaurant",
               style: Theme.of(context).textTheme.titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
-            leading: const Icon(
-              Icons.restaurant_menu_outlined,
-              color: tDarkColor,
-            ),
+            // leading: const Icon(
+            //   Icons.restaurant_menu_outlined,
+            //   color: tDarkColor,
+            // ),
             actions: <Widget>[
               IconButton(
                   onPressed: () {
@@ -61,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.black,
                   ))
             ]),
+        drawer: const NavDrawer(),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(tDefaultSize - 10),
@@ -76,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                       snapshot.hasData ? "Welcome ${snapshot.data}" : "",
                       //+ '- DEV'
-                      // style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
                   Column(
