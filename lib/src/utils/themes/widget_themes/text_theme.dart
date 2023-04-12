@@ -16,12 +16,16 @@ class TTextTheme {
     bodySmall: GoogleFonts.poppins(color: tDarkColor),
   );
   static TextTheme darkTextTheme = TextTheme(
-    displayMedium: GoogleFonts.montserrat(color: tWhiteColor),
-    titleSmall: GoogleFonts.poppins(color: tWhiteColor, fontSize: 24),
-    headlineSmall: GoogleFonts.montserrat(color: tWhiteColor),
-    headlineLarge: GoogleFonts.montserrat(color: tWhiteColor),
-    headlineMedium: GoogleFonts.montserrat(color: tWhiteColor),
+    displayMedium: GoogleFonts.montserrat(color: tWhiteColor, fontWeight: FontWeight.bold),
+    headlineLarge: GoogleFonts.montserrat(color:  tWhiteColor, fontWeight: FontWeight.bold),
+    headlineMedium: GoogleFonts.montserrat(color: tWhiteColor, fontWeight: FontWeight.bold, fontSize: 30),
+    headlineSmall: GoogleFonts.poppins(color: tWhiteColor, fontWeight: FontWeight.w700),
     titleLarge: GoogleFonts.poppins(color: tWhiteColor),
     titleMedium: GoogleFonts.poppins(color: tWhiteColor),
+    titleSmall: GoogleFonts.poppins(color: tWhiteColor),
+    bodyLarge: GoogleFonts.poppins(color: tWhiteColor),
+    bodyMedium: GoogleFonts.poppins(color: tWhiteColor),
+    bodySmall: GoogleFonts.poppins(color: tWhiteColor),
+
   );
 }

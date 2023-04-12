@@ -61,3 +61,4 @@ const String tForgetMailSubTitle = "Enter your registered E-Mail to receive OTP"
 
 const String tBasePath = "http://eahara.ainsoftsolutions.com/";
 const String tSlash = "/";
+const tHeaders = {'Content-Type': 'application/json'};
