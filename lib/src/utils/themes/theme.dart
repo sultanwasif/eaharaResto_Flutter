@@ -16,6 +16,7 @@ class TAppTheme {
     elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
     appBarTheme: const AppBarTheme(),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(),
+    useMaterial3: true
     // elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom()),
   );
 
@@ -28,6 +29,7 @@ class TAppTheme {
     elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
     appBarTheme: const AppBarTheme(),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(),
+    useMaterial3: true
     //elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom()),
   );
 }

@@ -25,6 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  bool hidePass = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -60,15 +62,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: tFormHeight,),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.fingerprint),
+                  obscureText: hidePass,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.fingerprint),
                     //hintText: "Password",
                     labelText: "Password",
-                    border: OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      onPressed: null,
-                      icon: Icon(Icons.remove_red_eye_sharp),
-                    )
+                    border: const OutlineInputBorder(),
+                    suffixIcon:  IconButton(
+                          onPressed: () {
+                            if(hidePass == true) {
+                              setState(() {
+                                hidePass = false;
+                              });
+                            } else {
+                              setState(() {
+                                hidePass = true;
+                              });
+                            }
+                          },
+                          icon: Icon(
+                              hidePass == true ?
+                              Icons.remove_red_eye_sharp :
+                              Icons.content_paste_off_sharp
+                          ),
+                        )
                   ),
                   controller: _passwordController,
                 ),
