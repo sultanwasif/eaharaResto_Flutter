@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     getShopDetails();
   }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -46,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: tPrimaryColor,
             title: Text(
               "eAhara Restaurant",
-              style: Theme.of(context).textTheme.titleLarge
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
             // leading: const Icon(
@@ -98,7 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                              const OrderList(titleText: "Total Orders",statusId : "0")));
+                                                  const OrderList(
+                                                      titleText: "Total Orders",
+                                                      statusId: "0")));
                                     },
                                     child: SizedBox(
                                       height: 100,
@@ -139,7 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const OrderList(titleText: "New Orders", statusId: "6",)));
+                                                  const OrderList(
+                                                    titleText: "New Orders",
+                                                    statusId: "6",
+                                                  )));
                                     },
                                     child: SizedBox(
                                       height: 100,
@@ -176,7 +184,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                              const OrderList(titleText: "Ready Orders", statusId: "2")));
+                                                  const OrderList(
+                                                      titleText: "Ready Orders",
+                                                      statusId: "2")));
                                     },
                                     child: SizedBox(
                                       height: 100,
@@ -217,7 +227,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                              const OrderList(titleText: "Picked Orders", statusId: "4")));
+                                                  const OrderList(
+                                                      titleText:
+                                                          "Picked Orders",
+                                                      statusId: "4")));
                                     },
                                     child: SizedBox(
                                       height: 100,
@@ -254,7 +267,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                              const OrderList(titleText: "Cancel Orders", statusId: "1")));
+                                                  const OrderList(
+                                                      titleText:
+                                                          "Cancel Orders",
+                                                      statusId: "1")));
                                     },
                                     child: SizedBox(
                                       height: 100,
@@ -295,7 +311,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                              const OrderList(titleText: "Delivered Orders", statusId: "3")));
+                                                  const OrderList(
+                                                      titleText:
+                                                          "Delivered Orders",
+                                                      statusId: "3")));
                                     },
                                     child: SizedBox(
                                       height: 100,
