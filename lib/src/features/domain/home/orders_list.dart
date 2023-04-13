@@ -107,62 +107,61 @@ class _OrderListState extends State<OrderList> {
                                   Text(resultData[index].refNo.toString()),
                                   Text(resultData[index].name.toString()),
                                   Text(resultData[index].total.toString()),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: const [
-                                      Text("Item Name"),
-                                      Text("Price"),
-                                      Text("Quantity"),
-                                    ],
-                                  ),
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: resultData[index].bookingDetails.length,
-                                    itemBuilder: (BuildContext context, int index1) {
-                                      late List<BookingDetail> subData =
-                                          resultData[index].bookingDetails;
-                                      return Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Text(subData[index1].item.name.toString()),
-                                          Text(subData[index1].price.toString()),
-                                          Text(subData[index1].quantity.toString()),
-                                        ],
-                                      );
-                                    },
-                                  )
-                                  // ListView(
-                                  //   children: <Widget>[
-                                  //     Center(
-                                  //       child: DataTable(
-                                  //           columns: const <DataColumn>[
-                                  //             DataColumn(
-                                  //                 label: Text("Name"),
-                                  //                 tooltip: "To Display name"),
-                                  //             DataColumn(
-                                  //                 label: Text("Price"),
-                                  //                 tooltip: "To Display Price"),
-                                  //             DataColumn(
-                                  //                 label: Text("Quantity"),
-                                  //                 tooltip: "Item Quantity"),
-                                  //           ],
-                                  //           rows: data[index]["BookingDetails"]
-                                  //               .map((bookings) =>
-                                  //                   const <DataRow>[DataRow(cells: [
-                                  //                     // DataCell(Text(bookings["Item"]["Name"].toString())),
-                                  //                     // DataCell(Text(bookings["Price"].toString())),
-                                  //                     // DataCell(Text(bookings["Quantity"].toString())),
-                                  //                     DataCell(Text("Text1")),
-                                  //                     DataCell(Text("Text2")),
-                                  //                     DataCell(Text("Text3")),
-                                  //                   ])]
-                                  //           )
-                                  //               .toList()),
-                                  //     )
+                                  // Row(
+                                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                                  //   children: const [
+                                  //     Text("Item Name"),
+                                  //     Text("Price"),
+                                  //     Text("Quantity"),
                                   //   ],
+                                  // ),
+                                  // ListView.builder(
+                                  //   shrinkWrap: true,
+                                  //   itemCount: resultData[index].bookingDetails.length,
+                                  //   itemBuilder: (BuildContext context, int index1) {
+                                  //     late List<BookingDetail> subData =
+                                  //         resultData[index].bookingDetails;
+                                  //     return Row(
+                                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  //       crossAxisAlignment: CrossAxisAlignment.center,
+                                  //       children: [
+                                  //         Text(subData[index1].item.name.toString()),
+                                  //         Text(subData[index1].price.toString()),
+                                  //         Text(subData[index1].quantity.toString()),
+                                  //       ],
+                                  //     );
+                                  //   },
                                   // )
+                                  Center(
+                                    child: DataTable(
+                                      border: TableBorder.all(
+                            width: 1,
+                            color:tDarkColor,),
+                                        dividerThickness: 1,
+                                        columns: const <DataColumn>[
+                                          DataColumn(
+                                              label: Text("Name"),
+                                              tooltip: "To Display name"),
+                                          DataColumn(
+                                              label: Text("Price"),
+                                              tooltip: "To Display Price"),
+                                          DataColumn(
+                                              label: Text("Quantity"),
+                                              tooltip: "Item Quantity"),
+                                        ],
+                                        rows: resultData[index].bookingDetails
+                                            .map((bookings) =>
+                                                DataRow(cells: [
+                                                  DataCell(Text(bookings.item.name.toString())),
+                                                  DataCell(Text(bookings.price.toString())),
+                                                  DataCell(Text(bookings.quantity.toString())),
+                                                  // DataCell(Text("Text1")),
+                                                  // DataCell(Text("Text2")),
+                                                  // DataCell(Text("Text3")),
+                                                ])
+                                        ).toList()),
+                                  )
                                 ],
                               ),
                             );
