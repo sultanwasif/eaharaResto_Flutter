@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/src/features/authentication/screens/welcome_screen/welcomescreen.dart';
 import 'package:flutterapp/src/constants/color.dart';
-import 'package:flutterapp/src/features/domain/home_screen.dart';
+import 'package:flutterapp/src/features/container/container.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -120,7 +120,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       if (context.mounted) {
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const HomeScreen())
+            MaterialPageRoute(builder: (context) => NavBarContainer())
         );
       }
     } else {
@@ -143,7 +143,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     final SharedPreferences prefs = await _prefs;
     //final String? shopName = prefs.getString('shopName');
     if(prefs.containsKey('shopName')){
-      return prefs.getString('shopName').toString();;
+      return prefs.getString('shopName').toString();
     } else {
       return "";
     }

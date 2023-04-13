@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/src/constants/color.dart';
 import 'package:flutterapp/src/constants/sizes.dart';
 import 'package:flutterapp/src/constants/text.dart';
-import 'package:flutterapp/src/features/authentication/screens/spashscreen/splashscreen.dart';
-import 'package:flutterapp/src/features/authentication/screens/welcome_screen/welcomescreen.dart';
-import 'package:flutterapp/src/features/domain/orders_list.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
+import 'orders_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -38,33 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    // var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.black),
-            backgroundColor: tPrimaryColor,
-            title: Text(
-              "eAhara Restaurant",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            // leading: const Icon(
-            //   Icons.restaurant_menu_outlined,
-            //   color: tDarkColor,
-            // ),
-            actions: <Widget>[
-              IconButton(
-                  onPressed: () {
-                    logout();
-                  },
-                  icon: const Icon(
-                    Icons.logout,
-                    color: Colors.black,
-                  ))
-            ]),
+
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(tDefaultSize - 10),
@@ -355,14 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return prefs.getString('shopName').toString();
   }
 
-  Future<void> logout() async {
-    final SharedPreferences prefs = await _prefs;
-    var remove = prefs.remove('shopName');
-    if (context.mounted) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const SplashScreen()));
-    }
-  }
+
 
   Future<void> getShopDetails() async {
     if (mounted) {

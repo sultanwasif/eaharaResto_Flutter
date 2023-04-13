@@ -3,13 +3,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/src/constants/color.dart';
 import 'package:flutterapp/src/constants/sizes.dart';
 import 'package:flutterapp/src/constants/text.dart';
 import 'package:flutterapp/src/features/authentication/screens/login/forget_password.dart';
 import 'package:flutterapp/src/features/authentication/screens/sign_up/sign_up.dart';
-import 'package:flutterapp/src/features/authentication/screens/welcome_screen/welcomescreen.dart';
-import 'package:flutterapp/src/features/domain/home_screen.dart';
+import 'package:flutterapp/src/features/container/container.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -160,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
         prefs.setString('shopName', tokenInfo['UserName']);
         if (context.mounted) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()));
+              MaterialPageRoute(builder: (context) => const NavBarContainer()));
         }
       } else {
         _showErrorDialog();
