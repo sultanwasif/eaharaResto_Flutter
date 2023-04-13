@@ -92,7 +92,7 @@ class _OrderListState extends State<OrderList> {
           padding: const EdgeInsets.all(tDefaultSize - 10),
           child: Column(
             children: [
-              Text('Order Count : ${data.length}'),
+              Text('Order Count : ${resultData.length}'),
               const SizedBox(
                 height: tDefaultSize - 10,
               ),
