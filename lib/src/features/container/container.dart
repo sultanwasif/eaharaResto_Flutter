@@ -1,6 +1,7 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterapp/src/features/domain/home/home_screen.dart';
 import 'package:flutterapp/src/features/domain/products/products.dart';
 import 'package:flutterapp/src/features/domain/reports/reports.dart';
@@ -36,47 +37,46 @@ class _NavBarContainerState extends State<NavBarContainer> {
       const Icon(Icons.bar_chart, size: 30,),
       const Icon(Icons.update, size: 30,),
     ];
-    return Container(
-      color: tPrimaryColor,
-      child: SafeArea(
-        top: false,
-        child: Scaffold(
-          appBar: AppBar(
-              iconTheme: const IconThemeData(color: Colors.black),
-              backgroundColor: tPrimaryColor,
-              title: Text(
-                "eAhara Restaurant",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              leading: const Icon(
-                Icons.restaurant_menu_rounded,
-                color: tDarkColor,
-              ),
-              actions: <Widget>[
-                IconButton(
-                    onPressed: () {
-                      logout(context);
-                    },
-                    icon: const Icon(
-                      Icons.logout,
-                      color: Colors.black,
-                    ))
-              ]),
-          body: screens[index],
-          bottomNavigationBar: CurvedNavigationBar(
-            items: items,
-            backgroundColor: Colors.transparent,
-            color: tPrimaryColor,
-            height: 60,
-            index: index,
-            onTap: (index) => setState(() {
-              this.index = index;
-            }) ,
+    return Scaffold(
+      appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.black),
+          backgroundColor: tPrimaryColor,
+          title: Text(
+            "eAhara Restaurant",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
-        ),
+          leading: const Icon(
+            Icons.restaurant_menu_rounded,
+            color: tDarkColor,
+          ),
+          actions: <Widget>[
+            IconButton(
+                onPressed: () {
+                  logout(context);
+                },
+                icon: const Icon(
+                  Icons.logout,
+                  color: Colors.black,
+                )),
+          ],
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          systemNavigationBarColor: tPrimaryColor, // Navigation bar
+          statusBarColor: tPrimaryColor, // Status bar
+        ),),
+      body: screens[index],
+      extendBody: true,
+      bottomNavigationBar: CurvedNavigationBar(
+        items: items,
+        backgroundColor: Colors.transparent,
+        color: tPrimaryColor,
+        height: 45,
+        index: index,
+        onTap: (index) => setState(() {
+          this.index = index;
+        }) ,
       ),
     );
   }
