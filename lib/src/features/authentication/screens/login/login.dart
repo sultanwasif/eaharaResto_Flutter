@@ -140,11 +140,11 @@ class _LoginScreenState extends State<LoginScreen> {
       'UserName': _usernameController.text,
       'Password' : _passwordController.text
     };
-    final headers = {'Content-Type': 'application/json'};
+    // final headers = {'Content-Type': 'application/json'};
     String jsonBody = json.encode(user);
     http.Response response = await http
         .post(Uri.parse('${tBasePath}login'),
-        headers: headers,
+        headers: tHeaders,
         body: jsonBody);
     var tempTokenInfo = json.decode(response.body);
     if(tempTokenInfo is Map<String, dynamic>){
