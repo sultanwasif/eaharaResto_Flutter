@@ -44,7 +44,8 @@ class _ReportScreenState extends State<ReportScreen> {
       'FromDate': dateTimeRange.start.toIso8601String(),
       'ToDate': dateTimeRange.end.toIso8601String(),
       'ShopId': shopId,
-      'Paid': 'Not Paid',
+      // 'Paid': 'Not Paid',
+      //'Paid': 'Paid',
     };
     String jsonBody = json.encode(user);
     http.Response response = await http.post(
@@ -94,12 +95,19 @@ class _ReportScreenState extends State<ReportScreen> {
                 itemCount: bookingResult.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
-                    child: Column(
-                      children: [
-                        Text(bookingResult[index].refNo.toString()),
-                        Text(bookingResult[index].orderDate.toString()),
-                        Text(bookingResult[index].address.toString()),
-                      ],
+                    elevation: 5,
+                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(bookingResult[index].refNo.toString()),
+                          Text(bookingResult[index].orderDate.toString()),
+                          Text(bookingResult[index].address.toString()),
+                        ],
+                      ),
                     ),
                   );
                 }),

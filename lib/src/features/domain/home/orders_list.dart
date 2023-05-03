@@ -103,53 +103,58 @@ class _OrderListState extends State<OrderList> {
                           itemBuilder: (BuildContext context, int index) {
                             return Card(
                               elevation: 5,
-                              child: Column(
-                                children: [
-                                  Text('${resultData[index].name.toString()} (${resultData[index].mobileNo.toString()})', style: Theme.of(context).textTheme.bodyLarge,),
-                                  Text('${resultData[index].refNo.toString()} | ${resultData[index].orderDate.toString()}', style: Theme.of(context).textTheme.bodyMedium,),
-                                  Text(resultData[index].address.toString(), style: Theme.of(context).textTheme.bodySmall,),
-                                  Text(resultData[index].total.toString()),
-                                  const Divider(
-                                    color: Colors.redAccent, //color of divider
-                                    height: 2, //height spacing of divider
-                                    thickness: 2, //thickness of divier line
-                                    indent: 0, //spacing at the start of divider
-                                    endIndent: 0, //spacing at the end of divider
-                                  ),
-                                  Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      for(var mainItem in resultData[index].bookingDetails )
-                                        Text('${mainItem.quantity.toString()} X ${mainItem.item.name.toString()} = ${mainItem.totalPrice.toString()}')
-                                    ],
-                                  )
-                                  // Row(
-                                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  //   crossAxisAlignment: CrossAxisAlignment.center,
-                                  //   children: const [
-                                  //     Text("Item Name"),
-                                  //     Text("Price"),
-                                  //     Text("Quantity"),
-                                  //   ],
-                                  // ),
-                                  // ListView.builder(
-                                  //   shrinkWrap: true,
-                                  //   itemCount: resultData[index].bookingDetails.length,
-                                  //   itemBuilder: (BuildContext context, int index1) {
-                                  //     late List<BookingDetail> subData =
-                                  //         resultData[index].bookingDetails;
-                                  //     return Row(
-                                  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  //       crossAxisAlignment: CrossAxisAlignment.center,
-                                  //       children: [
-                                  //         Text(subData[index1].item.name.toString()),
-                                  //         Text(subData[index1].price.toString()),
-                                  //         Text(subData[index1].quantity.toString()),
-                                  //       ],
-                                  //     );
-                                  //   },
-                                  // )
+                              margin: const EdgeInsets.fromLTRB(0,0,0,10),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('${resultData[index].name.toString()} (${resultData[index].mobileNo.toString()})', style: Theme.of(context).textTheme.bodyLarge,),
+                                    Text('${resultData[index].refNo.toString()} | ${resultData[index].orderDate.toString()}', style: Theme.of(context).textTheme.bodyMedium,),
+                                    Text(resultData[index].address.toString(), style: Theme.of(context).textTheme.bodySmall,),
+                                    Text(resultData[index].total.toString()),
+                                    const Divider(
+                                      color: Colors.redAccent, //color of divider
+                                      height: 2, //height spacing of divider
+                                      thickness: 2, //thickness of divier line
+                                      indent: 0, //spacing at the start of divider
+                                      endIndent: 0, //spacing at the end of divider
+                                    ),
+                                    Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        for(var mainItem in resultData[index].bookingDetails )
+                                          Text('${mainItem.quantity.toString()} X ${mainItem.item.name.toString()} = ${mainItem.totalPrice.toString()}')
+                                      ],
+                                    )
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                                    //   children: const [
+                                    //     Text("Item Name"),
+                                    //     Text("Price"),
+                                    //     Text("Quantity"),
+                                    //   ],
+                                    // ),
+                                    // ListView.builder(
+                                    //   shrinkWrap: true,
+                                    //   itemCount: resultData[index].bookingDetails.length,
+                                    //   itemBuilder: (BuildContext context, int index1) {
+                                    //     late List<BookingDetail> subData =
+                                    //         resultData[index].bookingDetails;
+                                    //     return Row(
+                                    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    //       crossAxisAlignment: CrossAxisAlignment.center,
+                                    //       children: [
+                                    //         Text(subData[index1].item.name.toString()),
+                                    //         Text(subData[index1].price.toString()),
+                                    //         Text(subData[index1].quantity.toString()),
+                                    //       ],
+                                    //     );
+                                    //   },
+                                    // )
                             //       Center(
                             //         child: DataTable(
                             //           border: TableBorder.all(
@@ -179,7 +184,8 @@ class _OrderListState extends State<OrderList> {
                             //                     ])
                             //             ).toList()),
                             //       )
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           }),
