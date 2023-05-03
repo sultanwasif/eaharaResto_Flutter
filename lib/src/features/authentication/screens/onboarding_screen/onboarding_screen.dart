@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutterapp/src/features/authentication/screens/welcome_screen/welcomescreen.dart';
 import 'package:flutterapp/src/constants/color.dart';
@@ -39,7 +37,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         model: OnBoardingModel(
           image: "assets/onboarding/silky-delivery5.png",
           title: "ON TIME DELIVERY",
-          subTitle: "Get your order on time and serve your loved ones in no time",
+          subTitle:
+              "Get your order on time and serve your loved ones in no time",
           counterText: "2/3",
           bgColor: tOnBoardingPage2Color,
         ),
@@ -48,7 +47,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         model: OnBoardingModel(
           image: "assets/onboarding/pablo-965_on4.png",
           title: "SERVE HOT FOOD",
-          subTitle: "Party or Movie Time be Calm and serve hot your on-time delivery order",
+          subTitle:
+              "Party or Movie Time be Calm and serve hot your on-time delivery order",
           counterText: "3/3",
           bgColor: tOnBoardingPage3Color,
         ),
@@ -92,61 +92,74 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               child: const Text("Skip", style: TextStyle(color: Colors.black)),
             ),
           ),
-           Positioned(
-              bottom: 10,
-              child: AnimatedSmoothIndicator(
-                count: 3,
-                activeIndex: controller.currentPage,
-                effect: const ExpandingDotsEffect(
-                  activeDotColor: Color(0xff272727),
-                ),
+          Positioned(
+            bottom: 20,
+            child: AnimatedSmoothIndicator(
+              count: 3,
+              activeIndex: controller.currentPage,
+              duration: const Duration(milliseconds: 100),
+              onDotClicked: (cv) {
+                print(cv);
+                animateToNextSlide();
+              },
+              effect: const ExpandingDotsEffect(
+                activeDotColor: Color(0xff272727),
               ),
             ),
+          ),
         ],
       ),
     );
-
   }
-  onPageChangedCallback(int activePageIndex) {
-    setState(() {
-      currentPage = activePageIndex;
-    });
+
+  onPageChangedCallback(int activePageIndex) async {
+    if (activePageIndex == 2) {
+      setState(() {
+        currentPage = activePageIndex;
+      });
+      await Future.delayed(const Duration(milliseconds: 500))
+          .then((value) => skip());
+    } else {
+      setState(() {
+        currentPage = activePageIndex;
+      });
+    }
   }
 
   skip() async {
     final SharedPreferences prefs = await _prefs;
     //final String? shopName = prefs.getString('shopName');
-    if(prefs.containsKey('shopName')){
+    if (prefs.containsKey('shopName')) {
       if (context.mounted) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => NavBarContainer())
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NavBarContainer()));
       }
     } else {
       if (context.mounted) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const WelcomeScreen())
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const WelcomeScreen()));
       }
     }
 
     // controller.jumpToPage(page: 2);
   }
+
   animateToNextSlide() {
     int nextPage = controller.currentPage + 1;
-    controller.animateToPage(page: nextPage);
+    if (controller.currentPage == 2) {
+      skip();
+    } else {
+      controller.animateToPage(page: nextPage);
+    }
   }
 
   futurePref() async {
     final SharedPreferences prefs = await _prefs;
     //final String? shopName = prefs.getString('shopName');
-    if(prefs.containsKey('shopName')){
+    if (prefs.containsKey('shopName')) {
       return prefs.getString('shopName').toString();
     } else {
       return "";
     }
   }
-
 }
