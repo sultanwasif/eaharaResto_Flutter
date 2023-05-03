@@ -18,7 +18,7 @@ class ShopBookingDetails {
     // required this.isPaid,
     // required this.isBlackList,
     // this.description,
-    // this.remarks,
+    this.remarks,
     // this.time,
     // required this.date,
     // this.pickUpDate,
@@ -34,9 +34,9 @@ class ShopBookingDetails {
     // required this.actualTotal,
     // required this.balance,
     required this.name,
-    // required this.mobileNo,
+    required this.mobileNo,
     // required this.emailId,
-    // this.address,
+    this.address,
     required this.refNo,
     // required this.statusName,
     // this.cancelRemarks,
@@ -52,7 +52,7 @@ class ShopBookingDetails {
     // this.locationId,
     // required this.location,
     // required this.isOrderLater,
-    // required this.orderDate,
+    this.orderDate,
     // this.promoOfferId,
     // required this.promoOffer,
     // this.employeeId,
@@ -79,7 +79,7 @@ class ShopBookingDetails {
   // bool isPaid;
   // bool isBlackList;
   // String? description;
-  // String? remarks;
+  String? remarks;
   // String? time;
   // DateTime date;
   // DateTime? pickUpDate;
@@ -95,9 +95,9 @@ class ShopBookingDetails {
   // int actualTotal;
   // int balance;
   String name;
-  // String mobileNo;
+  String mobileNo;
   // String emailId;
-  // String? address;
+  String? address;
   String refNo;
   // Name statusName;
   // dynamic cancelRemarks;
@@ -113,7 +113,7 @@ class ShopBookingDetails {
   // int? locationId;
   // Location location;
   // bool isOrderLater;
-  // DateTime orderDate;
+  String? orderDate;
   // dynamic promoOfferId;
   // PromoOffer promoOffer;
   // int? employeeId;
@@ -140,7 +140,7 @@ class ShopBookingDetails {
     // isPaid: json["IsPaid"],
     // isBlackList: json["IsBlackList"],
     // description: json["Description"],
-    // remarks: json["Remarks"],
+    remarks: json["Remarks"],
     // time: json["Time"],
     // date: DateTime.parse(json["Date"]),
     // pickUpDate: json["PickUpDate"] == null ? null : DateTime.parse(json["PickUpDate"]),
@@ -156,9 +156,9 @@ class ShopBookingDetails {
     // actualTotal: json["ActualTotal"],
     // balance: json["Balance"],
     name: json["Name"],
-    // mobileNo: json["MobileNo"],
+    mobileNo: json["MobileNo"],
     // emailId: json["EmailId"],
-    // address: json["Address"],
+    address: json["Address"],
     refNo: json["RefNo"],
     // statusName: nameValues.map[json["StatusName"]]!,
     // cancelRemarks: json["CancelRemarks"],
@@ -174,7 +174,7 @@ class ShopBookingDetails {
     // locationId: json["LocationId"],
     // location: Location.fromJson(json["Location"]),
     // isOrderLater: json["IsOrderLater"],
-    // orderDate: DateTime.parse(json["OrderDate"]),
+    orderDate: DateTime.parse(json["OrderDate"]).toString(),
     // promoOfferId: json["PromoOfferId"],
     // promoOffer: PromoOffer.fromJson(json["PromoOffer"]),
     // employeeId: json["EmployeeId"],
@@ -202,7 +202,7 @@ class ShopBookingDetails {
     // "IsPaid": isPaid,
     // "IsBlackList": isBlackList,
     // "Description": description,
-    // "Remarks": remarks,
+    "Remarks": remarks,
     // "Time": time,
     // "Date": date.toIso8601String(),
     // "PickUpDate": pickUpDate?.toIso8601String(),
@@ -218,9 +218,9 @@ class ShopBookingDetails {
     // "ActualTotal": actualTotal,
     // "Balance": balance,
     "Name": name,
-    // "MobileNo": mobileNo,
+    "MobileNo": mobileNo,
     // "EmailId": emailId,
-    // "Address": address,
+    "Address": address,
     "RefNo": refNo,
     // "StatusName": nameValues.reverse[statusName],
     // "CancelRemarks": cancelRemarks,
@@ -236,7 +236,7 @@ class ShopBookingDetails {
     // "LocationId": locationId,
     // "Location": location.toJson(),
     // "IsOrderLater": isOrderLater,
-    // "OrderDate": orderDate.toIso8601String(),
+    "OrderDate": orderDate.toString(),
     // "PromoOfferId": promoOfferId,
     // "PromoOffer": promoOffer.toJson(),
     // "EmployeeId": employeeId,
@@ -263,7 +263,7 @@ class BookingDetail {
     // required this.id,
     required this.quantity,
     required this.price,
-    // required this.totalPrice,
+    required this.totalPrice,
     // required this.isActive,
     // this.remarks,
     // required this.bookingId,
@@ -281,7 +281,7 @@ class BookingDetail {
   // int id;
   String quantity;
   String price;
-  // int totalPrice;
+  String totalPrice;
   // bool isActive;
   // dynamic remarks;
   // int bookingId;
@@ -299,7 +299,7 @@ class BookingDetail {
     // id: json["Id"],
     quantity: json["Quantity"].toString(),
     price: json["Price"].toString(),
-    // totalPrice: json["TotalPrice"],
+    totalPrice: json["TotalPrice"].toString(),
     // isActive: json["IsActive"],
     // remarks: json["Remarks"],
     // bookingId: json["BookingId"],
@@ -318,7 +318,7 @@ class BookingDetail {
     // "Id": id,
     "Quantity": quantity,
     "Price": price,
-    // "TotalPrice": totalPrice,
+    "TotalPrice": totalPrice,
     // "IsActive": isActive,
     // "Remarks": remarks,
     // "BookingId": bookingId,

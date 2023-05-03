@@ -102,11 +102,28 @@ class _OrderListState extends State<OrderList> {
                           itemCount: resultData.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Card(
+                              elevation: 5,
                               child: Column(
                                 children: [
-                                  Text(resultData[index].refNo.toString()),
-                                  Text(resultData[index].name.toString()),
+                                  Text('${resultData[index].name.toString()} (${resultData[index].mobileNo.toString()})', style: Theme.of(context).textTheme.bodyLarge,),
+                                  Text('${resultData[index].refNo.toString()} | ${resultData[index].orderDate.toString()}', style: Theme.of(context).textTheme.bodyMedium,),
+                                  Text(resultData[index].address.toString(), style: Theme.of(context).textTheme.bodySmall,),
                                   Text(resultData[index].total.toString()),
+                                  const Divider(
+                                    color: Colors.redAccent, //color of divider
+                                    height: 2, //height spacing of divider
+                                    thickness: 2, //thickness of divier line
+                                    indent: 0, //spacing at the start of divider
+                                    endIndent: 0, //spacing at the end of divider
+                                  ),
+                                  Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      for(var mainItem in resultData[index].bookingDetails )
+                                        Text('${mainItem.quantity.toString()} X ${mainItem.item.name.toString()} = ${mainItem.totalPrice.toString()}')
+                                    ],
+                                  )
                                   // Row(
                                   //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   //   crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,35 +150,35 @@ class _OrderListState extends State<OrderList> {
                                   //     );
                                   //   },
                                   // )
-                                  Center(
-                                    child: DataTable(
-                                      border: TableBorder.all(
-                            width: 1,
-                            color:tDarkColor,),
-                                        dividerThickness: 1,
-                                        columns: const <DataColumn>[
-                                          DataColumn(
-                                              label: Text("Name"),
-                                              tooltip: "To Display name"),
-                                          DataColumn(
-                                              label: Text("Price"),
-                                              tooltip: "To Display Price"),
-                                          DataColumn(
-                                              label: Text("Quantity"),
-                                              tooltip: "Item Quantity"),
-                                        ],
-                                        rows: resultData[index].bookingDetails
-                                            .map((bookings) =>
-                                                DataRow(cells: [
-                                                  DataCell(Text(bookings.item.name.toString())),
-                                                  DataCell(Text(bookings.price.toString())),
-                                                  DataCell(Text(bookings.quantity.toString())),
-                                                  // DataCell(Text("Text1")),
-                                                  // DataCell(Text("Text2")),
-                                                  // DataCell(Text("Text3")),
-                                                ])
-                                        ).toList()),
-                                  )
+                            //       Center(
+                            //         child: DataTable(
+                            //           border: TableBorder.all(
+                            // width: 1,
+                            // color:tDarkColor,),
+                            //             dividerThickness: 1,
+                            //             columns: const <DataColumn>[
+                            //               DataColumn(
+                            //                   label: Text("Name"),
+                            //                   tooltip: "To Display name"),
+                            //               DataColumn(
+                            //                   label: Text("Price"),
+                            //                   tooltip: "To Display Price"),
+                            //               DataColumn(
+                            //                   label: Text("Quantity"),
+                            //                   tooltip: "Item Quantity"),
+                            //             ],
+                            //             rows: resultData[index].bookingDetails
+                            //                 .map((bookings) =>
+                            //                     DataRow(cells: [
+                            //                       DataCell(Text(bookings.item.name.toString())),
+                            //                       DataCell(Text(bookings.price.toString())),
+                            //                       DataCell(Text(bookings.quantity.toString())),
+                            //                       // DataCell(Text("Text1")),
+                            //                       // DataCell(Text("Text2")),
+                            //                       // DataCell(Text("Text3")),
+                            //                     ])
+                            //             ).toList()),
+                            //       )
                                 ],
                               ),
                             );
