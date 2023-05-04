@@ -8,6 +8,9 @@ import 'package:flutterapp/src/features/domain/reports/booking_report.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../../container/pop_up.dart';
+import 'booking_filters.dart';
+
 class ReportScreen extends StatefulWidget {
   const ReportScreen({Key? key}) : super(key: key);
 
@@ -24,9 +27,12 @@ class _ReportScreenState extends State<ReportScreen> {
     start: DateTime.now().subtract((const Duration(days: 30))),
     end: DateTime.now(),
   );
+  List<String> _chipItems = [];
+  int selectedIndex = 0;
 
   @override
   void initState() {
+    _chipItems = ["None","Paid", "Not Paid"];
     // TODO: implement initState
     super.initState();
     getReports();
@@ -76,20 +82,67 @@ class _ReportScreenState extends State<ReportScreen> {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              // const Text("Un Paid Reports"),
-              Expanded(child: ElevatedButton(onPressed: () {}, child: const Text("Date Range")))
-              // TextButton(
-              //     child: Row(children: const [
-              //       Text("Filter"),
-              //       Icon(Icons.filter_alt_rounded),
-              //     ]),
-              //     onPressed: () {
-              //       showSimpleDialog(context);
-              //     })
+              FloatingActionButton.extended(
+                elevation: 5,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                    // gapPadding: 0.0,
+                    borderRadius: BorderRadius.circular(25),
+                    // borderSide: const BorderSide(color: Colors.black)
+                ),
+                label: const Text('Filters'), // <-- Text
+                icon: const Icon(
+                  Icons.filter_alt,
+                  size: 24.0,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    PopUpDialogBox(
+                        builder: (context) => const BookingReportFilterOptions()
+                    ),
+                  );
+                },
+              ),
+              Card(
+                semanticContainer: false,
+                shadowColor: Colors.transparent,
+                elevation: 15,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0)
+                ),
+                child: OutlinedButton.icon(
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      PopUpDialogBox(
+                          builder: (context) => const BookingReportFilterOptions()
+                      ),
+                    );
+                  },
+                  style: OutlinedButton.styleFrom(
+                    // backgroundColor: Colors.red[50],
+                    minimumSize: const Size(25,25),
+                    // side: const BorderSide(width: 1, color: Colors.red),
+                    // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    padding: const EdgeInsets.only(
+                        top: 8,
+                        bottom: 8,
+                        right: 15,
+                        left: 15
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0)
+                    ),
+                  ),
+                  label: const Text('Filters',style: TextStyle(fontSize: 16),),
+                  icon: const Icon(Icons.filter_alt,size: 25,),
+                ),
+              ),
             ],
           ),
+          const SizedBox(height: 15,),
           Expanded(
             child: ListView.builder(
                 itemCount: bookingResult.length,

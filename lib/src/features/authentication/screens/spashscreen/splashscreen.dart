@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/src/constants/sizes.dart';
 import 'package:flutterapp/src/features/authentication/screens/onboarding_screen/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../container/container.dart';
 import '../welcome_screen/welcomescreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,12 +14,33 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 class _SplashScreenState extends State<SplashScreen> {
-
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   bool animate = false;
+
+
   @override
   void initState() {
     super.initState();
-    startAnimation();
+    initializeStartUp();
+
+  }
+
+  Future<void> initializeStartUp() async {
+    final SharedPreferences prefs = await _prefs;
+
+    if (prefs.containsKey('shopName')) {
+      if (context.mounted) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const NavBarContainer()
+           )
+        );
+      }
+    } else {
+      startAnimation();
+    }
+
   }
   Future startAnimation() async {
     await Future.delayed(const Duration(milliseconds: 500));
@@ -25,6 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(milliseconds: 5000));
     // Get.to(const WelcomeScreen());
     // if (!context.mounted) return;
+
     if (context.mounted) {
       Navigator.push(
           context,
@@ -33,6 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
 
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
