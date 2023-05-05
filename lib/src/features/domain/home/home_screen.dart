@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               builder: (context) =>
                                                   const OrderList(
                                                     titleText: "New Orders",
-                                                    statusId: "6",
+                                                    statusId: "5",
                                                   )));
                                     },
                                     child: SizedBox(
