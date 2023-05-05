@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../container/calander/date_range.dart';
 import '../../container/pop_up.dart';
 
 class BookingReportFilterOptions extends StatefulWidget {
@@ -14,6 +15,59 @@ class _BookingReportFilterOptionsState extends State<BookingReportFilterOptions>
   bool sel1  = false;
   bool sel2 = false;
   bool sel3 = false;
+
+  DateTime? startDate;
+  DateTime? endDate;
+
+  DateTimeRange? _selectedDateRange;
+
+  // This function will be triggered when the floating button is pressed
+  void cal1() async {
+
+    return showCustomDateRangePicker(
+      context,
+      dismissible: true,
+      minimumDate: DateTime.now().subtract((const Duration(days: 365))),
+      maximumDate: DateTime.now(),
+      // endDate: Date,
+      // startDate: DateTime.now().subtract((const Duration(days: 365))),
+      backgroundColor: Colors.white,
+      primaryColor: Colors.black,
+      onApplyClick: (start, end) {
+        setState(() {
+          endDate = end;
+          startDate = start;
+        });
+      },
+      onCancelClick: () {
+        setState(() {
+          endDate = null;
+          startDate = null;
+        });
+      },
+    );
+  }
+
+  void cal2() async {
+    final DateTimeRange? result = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime.now().subtract((const Duration(days: 365))),
+      lastDate: DateTime.now(),
+      currentDate: DateTime.now(),
+      saveText: 'Done',
+      initialEntryMode: DatePickerEntryMode.input
+    );
+
+
+    if (result != null) {
+      // Rebuild the UI
+      print(result.start.toString());
+      setState(() {
+        _selectedDateRange = result;
+      });
+    }
+  }
+
 
 
   @override
@@ -128,6 +182,25 @@ class _BookingReportFilterOptionsState extends State<BookingReportFilterOptions>
                       ],
                     ),
                     const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        ElevatedButton(onPressed: cal1, child: const Text('Cal1')),
+                        ElevatedButton(onPressed: cal2, child: const Text('Cal2')),
+
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        color: Colors.black,
+                        height: 500,
+                        child: DateRangePickerDialog(
+                          firstDate: DateTime.now().subtract((const Duration(days: 365))),
+                          lastDate: DateTime.now(),
+                          currentDate: DateTime.now(),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )),
