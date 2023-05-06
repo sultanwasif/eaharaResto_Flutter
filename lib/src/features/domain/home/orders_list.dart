@@ -113,7 +113,6 @@ class _OrderListState extends State<OrderList> {
                                     Text('${resultData[index].name.toString()} (${resultData[index].mobileNo.toString()})', style: Theme.of(context).textTheme.bodyLarge,),
                                     Text('${resultData[index].refNo.toString()} | ${resultData[index].orderDate.toString()}', style: Theme.of(context).textTheme.bodyMedium,),
                                     Text(resultData[index].address.toString(), style: Theme.of(context).textTheme.bodySmall,),
-                                    Text(resultData[index].total.toString()),
                                     const Divider(
                                       color: Colors.redAccent, //color of divider
                                       height: 2, //height spacing of divider
@@ -122,11 +121,24 @@ class _OrderListState extends State<OrderList> {
                                       endIndent: 0, //spacing at the end of divider
                                     ),
                                     Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        // mainAxisAlignment: MainAxisAlignment.start,
+                                        // crossAxisAlignment: CrossAxisAlignment.start,
                                       children: <Widget>[
                                         for(var mainItem in resultData[index].bookingDetails )
-                                          Text('${mainItem.quantity.toString()} X ${mainItem.item.name.toString()} = ${mainItem.totalPrice.toString()}')
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Flexible(child: Text('${mainItem.quantity.toString()} X ${mainItem.item.name.toString()}')),
+                                              Text(mainItem.totalPrice.toString())
+                                            ],
+                                          )
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Flexible(child: Text(resultData[index].remarks.toString(), style : const TextStyle(color: Colors.redAccent))),
+                                        Text('Total : ${resultData[index].total.toString()}', style : const TextStyle(fontWeight: FontWeight.bold))
                                       ],
                                     )
                                     // Row(
