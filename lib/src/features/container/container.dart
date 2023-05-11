@@ -61,7 +61,7 @@ class _NavBarContainerState extends State<NavBarContainer> {
                   logout(context);
                 },
                 icon: const Icon(
-                  Icons.logout,
+                  Icons.person,
                   color: Colors.black,
                 )),
           ],
