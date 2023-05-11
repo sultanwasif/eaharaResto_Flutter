@@ -84,7 +84,7 @@ class _NavBarContainerState extends State<NavBarContainer> {
           });
         },
       ),
-      extendBody: true,
+      extendBody: false,
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: CurvedNavigationBar(
         items: items,

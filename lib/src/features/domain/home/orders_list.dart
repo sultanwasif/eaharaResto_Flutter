@@ -53,9 +53,9 @@ class _OrderListState extends State<OrderList> {
     for (int index = 0; index < shoppingData.length; index++) {
       resultData.add(ShopBookingDetails.fromJson(shoppingData[index]));
     }
-    // if (kDebugMode) {
-    //   print(response.body.length);
-    // }
+    if (kDebugMode) {
+      print(shopID);
+    }
     //      if(tempOrders.) {
     //        // Map<String, dynamic> shopDashboard = json.decode(response.body);
     //        data = json.decode(response.body);
@@ -112,7 +112,7 @@ class _OrderListState extends State<OrderList> {
                                   children: [
                                     Text('${resultData[index].name.toString()} (${resultData[index].mobileNo.toString()})', style: Theme.of(context).textTheme.bodyLarge,),
                                     Text('${resultData[index].refNo.toString()} | ${resultData[index].orderDate.toString()}', style: Theme.of(context).textTheme.bodyMedium,),
-                                    Text(resultData[index].address.toString(), style: Theme.of(context).textTheme.bodySmall,),
+                                    Text(resultData[index].address.toString().replaceAll("\n",", "), style: Theme.of(context).textTheme.bodySmall,),
                                     const Divider(
                                       color: Colors.redAccent, //color of divider
                                       height: 2, //height spacing of divider

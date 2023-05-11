@@ -38,7 +38,7 @@ class ShopBookingDetails {
     // required this.emailId,
     this.address,
     required this.refNo,
-    // required this.statusName,
+    this.statusName,
     // this.cancelRemarks,
     // this.lat,
     // this.lng,
@@ -99,7 +99,7 @@ class ShopBookingDetails {
   // String emailId;
   String? address;
   String refNo;
-  // Name statusName;
+  String? statusName;
   // dynamic cancelRemarks;
   // String? lat;
   // String? lng;
@@ -160,7 +160,7 @@ class ShopBookingDetails {
     // emailId: json["EmailId"],
     address: json["Address"],
     refNo: json["RefNo"],
-    // statusName: nameValues.map[json["StatusName"]]!,
+    statusName: json["StatusName"],
     // cancelRemarks: json["CancelRemarks"],
     // lat: json["Lat"],
     // lng: json["Lng"],
@@ -222,7 +222,7 @@ class ShopBookingDetails {
     // "EmailId": emailId,
     "Address": address,
     "RefNo": refNo,
-    // "StatusName": nameValues.reverse[statusName],
+    "StatusName": statusName,
     // "CancelRemarks": cancelRemarks,
     // "Lat": lat,
     // "Lng": lng,

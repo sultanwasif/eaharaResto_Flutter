@@ -7,6 +7,7 @@ import 'package:flutterapp/src/constants/sizes.dart';
 import 'package:flutterapp/src/constants/text.dart';
 import 'package:flutterapp/src/features/domain/products/product_dto.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -54,18 +55,31 @@ class _ProductScreenState extends State<ProductScreen> {
     return Scaffold(
       body:  _isInit == false ? Column(
         children: [
-          const Text("Product List"),
-          const SizedBox(height: tDefaultSize -10,),
+          // const Text("Product List"),
+          // const SizedBox(height: tDefaultSize -10,),
           Expanded(
             child: ListView.builder(
               itemCount: shopItems.length,
                 itemBuilder: (BuildContext context, int index ) {
               return Card(
                 child: Column(
-                  children: [
-                    Text(shopItems[index].name.toString()),
-                    Text(shopItems[index].price.toString()),
-                    Text(shopItems[index].itemsCategory!.name.toString())
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: shopItems[index].image.isNotEmpty ? NetworkImage("$tBasePath${shopItems[index].image.toString()}") as ImageProvider : const AssetImage("assets/logo/no-Image.png") , // No matter how big it is, it won't overflow
+                      radius: 30,
+                      ),
+                      title: Text(shopItems[index].name.toString()),
+                      subtitle: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('\u{20B9}${double.parse(shopItems[index].price.toString()).round().toString()}'),
+                          Text(shopItems[index].description.toString())
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -74,6 +88,11 @@ class _ProductScreenState extends State<ProductScreen> {
         ],
       ): const Center(
         child: CircularProgressIndicator(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Add Items',
+        child: const Icon(Icons.add),
       ),
     );
   }

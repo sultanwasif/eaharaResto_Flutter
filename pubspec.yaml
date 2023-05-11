@@ -61,5 +61,6 @@ flutter:
     - assets/logo/aharalogo.png
     - assets/login/sammy-45.png
     - assets/login/icons8-restaurant-building-48.png
+    - assets/logo/no-Image.png
 
   uses-material-design: true

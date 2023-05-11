@@ -17,7 +17,7 @@ class ShopItems {
     this.price,
     this.commissionPercentage,
     this.offerPrice,
-    this.image,
+    required this.image,
     this.isActive,
     this.inActive,
     this.shopId,
@@ -39,7 +39,7 @@ class ShopItems {
   String? price;
   String? commissionPercentage;
   String? offerPrice;
-  String? image;
+  String image;
   bool? isActive;
   bool? inActive;
   String? shopId;
@@ -61,7 +61,7 @@ class ShopItems {
     price: json["Price"].toString(),
     commissionPercentage: json["CommissionPercentage"].toString(),
     offerPrice: json["OfferPrice"].toString(),
-    image: json["Image"].toString(),
+    image: json["Image"] ?? "",
     isActive: json["IsActive"],
     inActive: json["InActive"],
     shopId: json["ShopId"].toString(),
