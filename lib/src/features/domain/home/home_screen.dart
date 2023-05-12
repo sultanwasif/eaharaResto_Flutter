@@ -349,9 +349,9 @@ class _HomeScreenState extends State<HomeScreen> {
     var tempTokenInfo = json.decode(response.body);
     if (tempTokenInfo is Map<String, dynamic>) {
       Map<String, dynamic> shopDashboard = json.decode(response.body);
-      if (kDebugMode) {
-        print(json.decode(response.body));
-      }
+      // if (kDebugMode) {
+      //   print(json.decode(response.body));
+      // }
       _newOrder = shopDashboard['New'];
       _approvedOrder = shopDashboard['Approved'] + _newOrder;
       _pickedOrder = shopDashboard['Packed'];

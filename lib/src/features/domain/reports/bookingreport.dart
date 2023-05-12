@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/src/constants/sizes.dart';
 import 'package:flutterapp/src/constants/text.dart';
 import 'package:flutterapp/src/features/domain/reports/booking_report.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,9 +22,9 @@ class ReportScreen extends StatefulWidget {
 
 class _ReportScreenState extends State<ReportScreen> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  DateFormat formatter = DateFormat('yyyy-MM-dd'); //specifies day/month/year format
   late bool _init = true;
   late List<BookingReport> bookingResult = [];
-  // var date = DateTime.now();
   DateTimeRange dateTimeRange = DateTimeRange(
     start: DateTime.now().subtract((const Duration(days: 30))),
     end: DateTime.now(),
@@ -32,13 +34,18 @@ class _ReportScreenState extends State<ReportScreen> {
 
   @override
   void initState() {
-    _chipItems = ["None","Paid", "Not Paid"];
+    _chipItems = ["None", "Paid", "Not Paid"];
     // TODO: implement initState
     super.initState();
-    getReports();
+    getReports(
+      dateTimeRange.start.toIso8601String(),
+      dateTimeRange.end.toIso8601String(),
+      'Both'
+    );
   }
 
-  getReports() async {
+  getReports(String fromDate, String toDate, String paidFilter) async {
+    bookingResult = [];
     if (mounted) {
       setState(() {
         _init = true;
@@ -47,20 +54,19 @@ class _ReportScreenState extends State<ReportScreen> {
     final SharedPreferences prefs = await _prefs;
     var shopId = prefs.getString('shopId').toString();
     Map<String, dynamic> user = {
-      'FromDate': dateTimeRange.start.toIso8601String(),
-      'ToDate': dateTimeRange.end.toIso8601String(),
+      'FromDate': fromDate,
+      'ToDate': toDate,
       'ShopId': shopId,
-      // 'Paid': 'Not Paid',
-      //'Paid': 'Paid',
+      'Paid': paidFilter
     };
     String jsonBody = json.encode(user);
     http.Response response = await http.post(
         Uri.parse('${tBasePath}BookingReportsShop'),
         headers: tHeaders,
         body: jsonBody);
-    if (kDebugMode) {
-      print(jsonDecode(response.body));
-    }
+    // if (kDebugMode) {
+    //   print(jsonDecode(response.body));
+    // }
     List<dynamic> reportData = jsonDecode(response.body);
 
     for (int index = 0; index < reportData.length; index++) {
@@ -77,97 +83,101 @@ class _ReportScreenState extends State<ReportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      padding: const EdgeInsets.all(tDefaultSize - 20),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              FloatingActionButton.extended(
-                elevation: 5,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                shape: RoundedRectangleBorder(
-                    // gapPadding: 0.0,
-                    borderRadius: BorderRadius.circular(25),
-                    // borderSide: const BorderSide(color: Colors.black)
-                ),
-                label: const Text('Filters'), // <-- Text
-                icon: const Icon(
-                  Icons.filter_alt,
-                  size: 24.0,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    PopUpDialogBox(
-                        builder: (context) => const BookingReportFilterOptions()
-                    ),
-                  );
-                },
-              ),
-              Card(
-                semanticContainer: false,
-                shadowColor: Colors.transparent,
-                elevation: 15,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0)
-                ),
-                child: OutlinedButton.icon(
-                  onPressed: () async {
-                    Navigator.of(context).push(
-                      PopUpDialogBox(
-                          builder: (context) => const BookingReportFilterOptions()
+      body: Container(
+        padding: const EdgeInsets.all(tDefaultSize - 20),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 15,
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: bookingResult.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      elevation: 5,
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(bookingResult[index].refNo.toString()),
+                            Text(bookingResult[index].orderDate.toString()),
+                            Text(bookingResult[index].address.toString()),
+                          ],
+                        ),
                       ),
                     );
-                  },
-                  style: OutlinedButton.styleFrom(
-                    // backgroundColor: Colors.red[50],
-                    minimumSize: const Size(25,25),
-                    // side: const BorderSide(width: 1, color: Colors.red),
-                    // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    padding: const EdgeInsets.only(
-                        top: 8,
-                        bottom: 8,
-                        right: 15,
-                        left: 15
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0)
-                    ),
-                  ),
-                  label: const Text('Filters',style: TextStyle(fontSize: 16),),
-                  icon: const Icon(Icons.filter_alt,size: 25,),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 15,),
-          Expanded(
-            child: ListView.builder(
-                itemCount: bookingResult.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    elevation: 5,
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(bookingResult[index].refNo.toString()),
-                          Text(bookingResult[index].orderDate.toString()),
-                          Text(bookingResult[index].address.toString()),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
-          )
-        ],
+                  }),
+            )
+          ],
+        ),
       ),
-    ));
+      resizeToAvoidBottomInset: true,
+      floatingActionButton: FloatingActionButton.extended(
+        elevation: 5,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: RoundedRectangleBorder(
+          // gapPadding: 0.0,
+          borderRadius: BorderRadius.circular(25),
+          // borderSide: const BorderSide(color: Colors.black)
+        ),
+        label: const Text('Filters'), // <-- Text
+        icon: const Icon(
+          Icons.filter_alt,
+          size: 24.0,
+        ),
+        onPressed: () {
+          filterPopUp();
+        },
+      ),
+    );
+  }
+
+  Future<void> filterPopUp() async {
+
+   try {
+     DateTime startDate = dateTimeRange.start;
+     DateTime toDate = dateTimeRange.end;
+     String filter = 'Both';
+     List result = await Navigator.of(context).push(
+       PopUpDialogBox(
+         builder: (context) =>
+             BookingReportFilterOptions(dateRange: dateTimeRange),
+       ),
+     );
+     if (result.isNotEmpty) {
+       if (formatter.format(dateTimeRange.start) != result[0] ||
+           formatter.format(dateTimeRange.end) != result[1]) {
+
+         startDate = DateTime.parse(result[0]);
+         toDate = DateTime.parse(result[1]);
+       }
+       if(result[2] == true){
+         filter = 'Both';
+       }
+       if(result[3] == true){
+         filter = 'Paid';
+       }
+       if(result[4] == true){
+         filter = 'Not Paid';
+       }
+       await getReports(
+           startDate.toIso8601String(),
+           toDate.toIso8601String(),
+           filter
+       );
+     }
+   } catch(e) {
+     await getReports(
+         dateTimeRange.start.toIso8601String(),
+         dateTimeRange.end.toIso8601String(),
+         'Both'
+     );
+     log("failed in applying the filter");
+   }
   }
 
   void showSimpleDialog(BuildContext context) => showDialog(
