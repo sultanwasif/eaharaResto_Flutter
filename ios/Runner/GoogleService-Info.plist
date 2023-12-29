@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCsDwWGJWAzpNU1gez5vJhaUcOMFpi-8Po</string>
+	<key>GCM_SENDER_ID</key>
+	<string>578432148134</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.eahara.cust.flutterapp</string>
+	<key>PROJECT_ID</key>
+	<string>eahara-1546419310137</string>
+	<key>STORAGE_BUCKET</key>
+	<string>eahara-1546419310137.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:578432148134:ios:7ce1be50ab06c368734a67</string>
+	<key>DATABASE_URL</key>
+	<string>https://eahara-1546419310137.firebaseio.com</string>
+</dict>
+</plist>

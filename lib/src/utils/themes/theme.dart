@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/src/utils/themes/widget_themes/text_button_theme.dart';
 import 'package:flutterapp/src/utils/themes/widget_themes/text_theme.dart';
 import 'package:flutterapp/src/utils/themes/widget_themes/elevated_button_theme.dart';
 import 'package:flutterapp/src/utils/themes/widget_themes/outlined_button_theme.dart';
@@ -14,6 +15,7 @@ class TAppTheme {
     textTheme: TTextTheme.lightTextTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
     elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
+    textButtonTheme: TTextButtonTheme.lightTextButtonTheme,
     appBarTheme: const AppBarTheme(),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(),
     useMaterial3: true
@@ -27,6 +29,7 @@ class TAppTheme {
     textTheme: TTextTheme.darkTextTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
     elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
+    textButtonTheme: TTextButtonTheme.darkTextButtonTheme,
     appBarTheme: const AppBarTheme(),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(),
     useMaterial3: true

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/src/constants/color.dart';
 import 'package:flutterapp/src/constants/sizes.dart';
